@@ -1,0 +1,29 @@
+{% extends 'poems/base.html' %}
+
+{% block title %}{{ poem.title }}{% endblock %}
+
+{% block content %}
+<h2>{{ poem.title }}</h2>
+<div class="poem-detail">
+  {% if poem.image %}
+    <img src="{{ poem.image.url }}" alt="{{ poem.title }}" class="poem-image">
+  {% endif %}
+  <p>{{ poem.content }}</p>
+
+  <h3>Comments</h3>
+  <div class="comments-section">
+    {% for comment in comments %}
+      <p><strong>{{ comment.author.username }}:</strong> {{ comment.text }}</p>
+    {% empty %}
+      <p>No comments yet. Be the first to comment!</p>
+    {% endfor %}
+  </div>
+
+  <h4>Add a Comment</h4>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Comment</button>
+  </form>
+</div>
+{% endblock %}

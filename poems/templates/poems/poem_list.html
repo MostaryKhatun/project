@@ -1,0 +1,15 @@
+{% extends 'poems/base.html' %}
+
+{% block content %}
+<h2>All Poems</h2>
+<div class="poem-list">
+  {% for poem in poems %}
+    <div class="poem-card">
+      <h3>{{ poem.title }}</h3>
+      <p>{{ poem.content|truncatewords:20 }}</p>
+      <a href="{% url 'poem_detail' poem.pk %}">Read More</a>
+      <a href="{% url 'add_to_wishlist' poem.pk %}" class="wishlist-btn">Add to Wishlist</a>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

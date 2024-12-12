@@ -1,0 +1,30 @@
+{% extends 'poems/base.html' %}
+
+{% block content %}
+    <section class="banner">
+        <h2>Welcome to My Personal Poetry Platform</h2>
+        <p>Share your thoughts and express yourself through poetry.</p>
+    </section>
+
+    <section class="featured-poems">
+        <h3>Featured Poems</h3>
+        {% for poem in featured_poems %}
+            <div class="poem-card">
+                <h4>{{ poem.title }}</h4>
+                <p>{{ poem.content|truncatewords:20 }}</p>
+                <a href="{% url 'poem_detail' poem.pk %}">Read More</a>
+            </div>
+        {% endfor %}
+    </section>
+
+    <section class="recent-poems">
+        <h3>Recent Poems</h3>
+        {% for poem in recent_poems %}
+            <div class="poem-card">
+                <h4>{{ poem.title }}</h4>
+                <p>{{ poem.content|truncatewords:20 }}</p>
+                <a href="{% url 'poem_detail' poem.pk %}">Read More</a>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}

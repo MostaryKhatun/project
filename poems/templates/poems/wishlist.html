@@ -1,0 +1,21 @@
+{% extends 'poems/base.html' %}
+
+{% block title %}Your Wishlist{% endblock %}
+
+{% block content %}
+<h2>Your Wishlist</h2>
+<div class="wishlist">
+  {% for item in wishlist_items %}
+    <div class="wishlist-item">
+      {% if item.poem.image %}
+        <img src="{{ item.poem.image.url }}" alt="{{ item.poem.title }}">
+      {% endif %}
+      <h3>{{ item.poem.title }}</h3>
+      <a href="{% url 'poem_detail' item.poem.pk %}">Read More</a>
+      <a href="{% url 'remove_from_wishlist' item.poem.pk %}" class="remove-btn">Remove</a>
+    </div>
+  {% empty %}
+    <p>Your wishlist is empty.</p>
+  {% endfor %}
+</div>
+{% endblock %}
